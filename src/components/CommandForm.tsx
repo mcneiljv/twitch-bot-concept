@@ -37,7 +37,7 @@ const CommandForm = (props: CommandFormInterface) => {
   }
 
   return (
-    <div className="ui input">
+    <div className="ui input field">
       <input
         ref={inputRef}
         type="text"
@@ -45,6 +45,7 @@ const CommandForm = (props: CommandFormInterface) => {
         onChange={(event) => handleInputChange(event)}
         onKeyPress={(event) => handleInputEnter(event)}
       />
+      <button className="ui button">Add</button>
     </div>
   );
 };

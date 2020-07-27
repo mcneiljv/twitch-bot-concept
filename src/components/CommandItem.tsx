@@ -6,23 +6,22 @@ import "./CommandItem.css";
 
 const CommandItem = (props: CommandItemInterface) => {
   return (
-    <div>
-      <div>
-        <input
-          value={props.command.text}
-          onBlur={props.handleCommandBlur}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            props.handleCommandUpdate(event, props.command.id)
-          }
-        />
-      </div>
+    <React.Fragment>
+      <td data-label="Command">
+        <p>{props.command.text}</p>
+      </td>
 
-      <i className="edit icon"></i>
+      <td data-label="Edit">
+        <i className="edit icon"></i>
+      </td>
 
-      <div onClick={() => props.handleCommandRemove(props.command.id)}>
-        <i className="cursor-pointer trash alternate icon"></i>
-      </div>
-    </div>
+      <td data-label="Delete">
+        {" "}
+        <div onClick={() => props.handleCommandRemove(props.command.id)}>
+          <i className="cursor-pointer trash alternate icon"></i>
+        </div>
+      </td>
+    </React.Fragment>
   );
 };
 
