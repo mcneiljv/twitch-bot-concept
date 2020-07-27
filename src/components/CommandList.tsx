@@ -6,18 +6,18 @@ import { CommandListInterface } from "./../interfaces";
 const CommandList = (props: CommandListInterface) => {
   return (
     <div>
-      <ul>
+      <table>
         {props.commands.map((command) => (
-          <li key={command.id}>
+          <tr key={command.id}>
             <CommandItem
               command={command}
               handleCommandUpdate={props.handleCommandUpdate}
               handleCommandRemove={props.handleCommandRemove}
               handleCommandBlur={props.handleCommandBlur}
             />
-          </li>
+          </tr>
         ))}
-      </ul>
+      </table>
     </div>
   );
 };

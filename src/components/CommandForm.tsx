@@ -37,7 +37,7 @@ const CommandForm = (props: CommandFormInterface) => {
   }
 
   return (
-    <div>
+    <div className="ui input">
       <input
         ref={inputRef}
         type="text"
