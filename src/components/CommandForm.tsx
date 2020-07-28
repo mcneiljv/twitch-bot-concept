@@ -36,6 +36,23 @@ const CommandForm = (props: CommandFormInterface) => {
     }
   }
 
+  // Handle add button click
+  function handleAddButton() {
+    // Prepare new command object
+    const newCommand: CommandInterface = {
+      id: shortid.generate(),
+      text: formState,
+    };
+
+    // Create new command item
+    props.handleCommandCreate(newCommand);
+
+    // Reset the input field
+    if (inputRef && inputRef.current) {
+      inputRef.current.value = "";
+    }
+  }
+
   return (
     <div className="ui input field">
       <input
@@ -45,7 +62,9 @@ const CommandForm = (props: CommandFormInterface) => {
         onChange={(event) => handleInputChange(event)}
         onKeyPress={(event) => handleInputEnter(event)}
       />
-      <button className="ui button">Add</button>
+      <button className="ui button" onClick={handleAddButton}>
+        Add
+      </button>
     </div>
   );
 };
