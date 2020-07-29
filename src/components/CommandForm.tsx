@@ -21,7 +21,7 @@ const CommandForm = (props: CommandFormInterface) => {
     event.stopPropagation();
 
     // Check for 'enter' key
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && inputRef!.current!.value !== "") {
       // Prepare new command object
       const newCommand: CommandInterface = {
         id: shortid.generate(),
@@ -40,20 +40,20 @@ const CommandForm = (props: CommandFormInterface) => {
 
   // Handle add button click
   function handleAddButton() {
-    //event.preventDefault();
+    if (inputRef!.current!.value !== "") {
+      // Prepare new command object
+      const newCommand: CommandInterface = {
+        id: shortid.generate(),
+        text: formState,
+      };
 
-    // Prepare new command object
-    const newCommand: CommandInterface = {
-      id: shortid.generate(),
-      text: formState,
-    };
+      // Create new command item
+      props.handleCommandCreate(newCommand);
 
-    // Create new command item
-    props.handleCommandCreate(newCommand);
-
-    // Reset the input field
-    if (inputRef && inputRef.current) {
-      inputRef.current.value = "";
+      // Reset the input field
+      if (inputRef && inputRef.current) {
+        inputRef.current.value = "";
+      }
     }
   }
 
