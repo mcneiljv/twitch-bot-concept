@@ -18,6 +18,8 @@ const CommandForm = (props: CommandFormInterface) => {
 
   // Handle 'enter' in command input
   function handleInputEnter(event: React.KeyboardEvent) {
+    event.stopPropagation();
+
     // Check for 'enter' key
     if (event.key === "Enter") {
       // Prepare new command object
@@ -38,6 +40,8 @@ const CommandForm = (props: CommandFormInterface) => {
 
   // Handle add button click
   function handleAddButton() {
+    //event.preventDefault();
+
     // Prepare new command object
     const newCommand: CommandInterface = {
       id: shortid.generate(),
@@ -54,14 +58,16 @@ const CommandForm = (props: CommandFormInterface) => {
   }
 
   return (
-    <div className="ui input field">
-      <input
-        ref={inputRef}
-        type="text"
-        placeholder="Add a New Command"
-        onChange={(event) => handleInputChange(event)}
-        onKeyPress={(event) => handleInputEnter(event)}
-      />
+    <div>
+      <div className="ui input field">
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="Add a New Command"
+          onChange={(event) => handleInputChange(event)}
+          onKeyPress={(event) => handleInputEnter(event)}
+        />
+      </div>
       <button className="ui button" onClick={handleAddButton}>
         Add
       </button>
