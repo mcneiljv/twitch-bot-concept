@@ -1,14 +1,14 @@
-import * as React from "react";
-import shortid from "shortid";
+import * as React from 'react';
+import shortid from 'shortid';
 
-import { CommandInterface, CommandFormInterface } from "./../interfaces";
+import { CommandInterface, CommandFormInterface } from './../interfaces';
 
 const CommandForm = (props: CommandFormInterface) => {
   // Create ref for form input
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   // Create new form state
-  const [formState, setFormState] = React.useState("");
+  const [formState, setFormState] = React.useState('');
 
   // Handle command input change
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -21,7 +21,7 @@ const CommandForm = (props: CommandFormInterface) => {
     event.stopPropagation();
 
     // Check for 'enter' key
-    if (event.key === "Enter" && inputRef!.current!.value !== "") {
+    if (event.key === 'Enter' && validateInputField()) {
       // Prepare new command object
       const newCommand: CommandInterface = {
         id: shortid.generate(),
@@ -31,16 +31,13 @@ const CommandForm = (props: CommandFormInterface) => {
       // Create new command item
       props.handleCommandCreate(newCommand);
 
-      // Reset the input field
-      if (inputRef && inputRef.current) {
-        inputRef.current.value = "";
-      }
+      resetInputValues();
     }
   }
 
   // Handle add button click
   function handleAddButton() {
-    if (inputRef!.current!.value !== "") {
+    if (validateInputField()) {
       // Prepare new command object
       const newCommand: CommandInterface = {
         id: shortid.generate(),
@@ -49,13 +46,23 @@ const CommandForm = (props: CommandFormInterface) => {
 
       // Create new command item
       props.handleCommandCreate(newCommand);
-
-      // Reset the input field
-      if (inputRef && inputRef.current) {
-        inputRef.current.value = "";
-      }
+      resetInputValues();
     }
   }
+
+  const resetInputValues = () => {
+    setFormState('');
+    // Reset the input field
+    if (inputRef && inputRef.current) {
+      inputRef.current.value = '';
+    }
+  };
+
+  const validateInputField = () => {
+    if (formState !== '') return true;
+
+    return false;
+  };
 
   return (
     <div>
